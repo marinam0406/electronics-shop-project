@@ -35,5 +35,13 @@ def test_string_to_number():
     """Проверка возвращения числа из строки-числа"""
     assert Item.string_to_number("5") == 5
     assert Item.string_to_number("1.5") == 1
+    assert Item.string_to_number("5.0") == 5
+
+def test_repr_str():
+    """Проверка для магических методов __repr__ и __str__"""
+    item = Item('Смартфон', 10000, 2)
+    assert repr(item) == "Item('Смартфон', 10000, 2)"
+    assert str(item) == "Смартфон"
+
 
 

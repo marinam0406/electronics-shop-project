@@ -21,6 +21,12 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
+    def __add__(self, other):
+        """Cложение экземпляров класса `Phone` и `Item` (сложение по количеству товара в магазине)"""
+        if not isinstance(other, Item):
+            raise ValueError
+        return self.quantity + other.quantity
+
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
@@ -68,3 +74,6 @@ class Item:
         """Возвращает число из числа-строки"""
         number = float(str_number)
         return int(number)
+
+    def phone1(self, quantity):
+        pass

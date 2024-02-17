@@ -9,6 +9,7 @@ packages = [{include = "electronics_shop_project"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 config = "^0.5.1"
+accessify = "^0.3.1"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -2,7 +2,7 @@
 import pytest
 
 from config import ITEMS
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
@@ -56,3 +56,13 @@ def test_repr_str():
     assert repr(phone1) == "Phone('iPhone 14', 120000, 5, 2)"
     assert str(phone1) == 'iPhone 14'
 
+def test_instantiate_from_csv_error():
+    """В файле items.csv удалена последняя колонка"""
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv('../tests/test_items.csv')
+
+
+def test_file_not_found_error():
+    """Файл items.csv отсутствует"""
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('../src/item.csv')

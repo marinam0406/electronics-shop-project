@@ -1,4 +1,5 @@
 import csv
+import os
 from pathlib import Path
 
 class InstantiateCSVError(Exception):
@@ -67,15 +68,16 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, csv_file='../src/items.csv'):
         """Добавление экземпляра класса из csv файла"""
-        cls.all = []
-        try:
-            with open(csv_file, 'r', newline="", encoding="windows-1251") as file:
-                data = csv.DictReader(file)
-                for item in data:
-                    cls(str(item["name"]), float(item["price"]), int(item["quantity"]))
-        except (ValueError, KeyError):
-            raise InstantiateCSVError("Файл items.csv поврежден")
-        except FileNotFoundError:
+        cls.all.clear()
+        if os.path.exists(csv_file):
+            try:
+                with open(csv_file, 'r', newline="", encoding="windows-1251") as file:
+                    data = csv.DictReader(file)
+                    for item in data:
+                        cls(name=str(item["name"]), price=float(item["price"]), quantity=int(item["quantity"]))
+            except KeyError:
+                raise InstantiateCSVError("Файл items.csv поврежден")
+        else:
             raise FileNotFoundError("Отсутствует файл items.csv")
 
     @staticmethod

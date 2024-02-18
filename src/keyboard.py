@@ -21,15 +21,6 @@ class KeyboardMixin:
 
 class Keyboard(Item, KeyboardMixin):
     """Создаем класс Keyboard для товара 'клавиатура'"""
-
-    @property
-    def language(self):
-        return self.__language
-
     def __init__(self, name, price, quantity):
         super().__init__(name, price, quantity)
         KeyboardMixin.__init__(self)
-
-    @language.setter
-    def language(self, value):
-        self.__language = value
